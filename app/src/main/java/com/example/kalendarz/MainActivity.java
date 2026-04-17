@@ -30,8 +30,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initWidgets();
+        updateWeekdayColors();
+
+        initWidgets();
         selectedDate = LocalDate.now();
         setMonthView();
+    }
+    private void updateWeekdayColors() {
+        boolean darkMode = (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES);
+
+        int color = darkMode ? Color.WHITE : Color.BLACK;
+
+        ((TextView) findViewById(R.id.textViewPon)).setTextColor(color);
+        ((TextView) findViewById(R.id.textViewWt)).setTextColor(color);
+        ((TextView) findViewById(R.id.textViewSr)).setTextColor(color);
+        ((TextView) findViewById(R.id.textViewCzw)).setTextColor(color);
+        ((TextView) findViewById(R.id.textViewPt)).setTextColor(color);
+        ((TextView) findViewById(R.id.textViewSob)).setTextColor(color);
+        ((TextView) findViewById(R.id.textViewNiedz)).setTextColor(color);
     }
 
     private void initWidgets() {
@@ -58,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             }
+            updateWeekdayColors();
         });
+
     }
 
     private void setMonthView() {
