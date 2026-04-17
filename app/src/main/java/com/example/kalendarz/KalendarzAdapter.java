@@ -1,5 +1,6 @@
 package com.example.kalendarz;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,13 +31,18 @@ public class KalendarzAdapter extends RecyclerView.Adapter<KalendarzAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         LocalDate date = dni.get(position);
-
+        LocalDate today = LocalDate.now();
 
         if (date == null) {
             holder.komorkaDnia.setText("");
         }
         else {
             holder.komorkaDnia.setText(String.valueOf(date.getDayOfMonth()));
+            if (date.equals(today)) {
+                holder.komorkaDnia.setTextColor(Color.RED);
+            } else {
+                holder.komorkaDnia.setTextColor(Color.BLACK);
+            }
         }
     }
 
