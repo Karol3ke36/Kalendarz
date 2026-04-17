@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
@@ -33,18 +34,22 @@ public class KalendarzAdapter extends RecyclerView.Adapter<KalendarzAdapter.View
         LocalDate date = dni.get(position);
         LocalDate today = LocalDate.now();
 
+        boolean darkMode = (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES);
+
         if (date == null) {
             holder.komorkaDnia.setText("");
+            return;
         }
-        else {
-            holder.komorkaDnia.setText(String.valueOf(date.getDayOfMonth()));
-            if (date.equals(today)) {
-                holder.komorkaDnia.setTextColor(Color.RED);
-            } else {
-                holder.komorkaDnia.setTextColor(Color.BLACK);
-            }
+
+        holder.komorkaDnia.setText(String.valueOf(date.getDayOfMonth()));
+
+        if (date.equals(today)) {
+            holder.komorkaDnia.setTextColor(Color.RED);
+        } else {
+            holder.komorkaDnia.setTextColor(darkMode ? Color.WHITE : Color.BLACK);
         }
     }
+
 
     @Override
     public int getItemCount() {

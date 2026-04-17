@@ -1,9 +1,11 @@
 package com.example.kalendarz;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
     private RecyclerView listaDni;
-    private Button buttonPrev, buttonNext;
+    private Button buttonPrev, buttonNext, trybCiemny;
 
     private LocalDate selectedDate;
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         listaDni = findViewById(R.id.listaDni);
         buttonPrev = findViewById(R.id.button);
         buttonNext = findViewById(R.id.button2);
+        trybCiemny = findViewById(R.id.trybCiemny);
 
         buttonPrev.setOnClickListener(v -> {
             selectedDate = selectedDate.minusMonths(1);
@@ -46,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
         buttonNext.setOnClickListener(v -> {
             selectedDate = selectedDate.plusMonths(1);
             setMonthView();
+        });
+        trybCiemny.setOnClickListener(v -> {
+            int current = AppCompatDelegate.getDefaultNightMode();
+
+            if (current == AppCompatDelegate.MODE_NIGHT_YES) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            }
         });
     }
 
@@ -77,4 +89,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return days;
     }
+
 }
